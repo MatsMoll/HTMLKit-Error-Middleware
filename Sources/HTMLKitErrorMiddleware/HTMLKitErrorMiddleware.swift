@@ -4,13 +4,11 @@ import HTMLKit
 /// Captures all errors and transforms them into an internal server error.
 public final class HTMLKitErrorMiddleware<F: StaticView, S: ContextualTemplate>: Middleware, Service where S.Context == HTTPStatus {
 
-    /// The environment to respect when presenting errors.
-//    let environment: Environment
+    /// Create a new ErrorMiddleware for the supplied pages.
+    public init(notFoundPage: F.Type, serverErrorTemplate: S.Type) {}
 
-    /// Create a new ErrorMiddleware for the supplied environment.
-    public init(notFoundPage: F.Type, serverErrorTemplate: S.Type) {
-//        self.environment = environment
-    }
+    /// Create a new ErrorMiddleware
+    public init() {}
 
     /// See `Middleware.respond`
     public func respond(to req: Request, chainingTo next: Responder) throws -> Future<Response> {
