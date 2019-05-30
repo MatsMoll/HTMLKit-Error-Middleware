@@ -5,11 +5,11 @@ import HTMLKit
 public final class HTMLKitErrorMiddleware<F: StaticView, S: ContextualTemplate>: Middleware, Service where S.Context == HTTPStatus {
 
     /// The environment to respect when presenting errors.
-    let environment: Environment
+//    let environment: Environment
 
     /// Create a new ErrorMiddleware for the supplied environment.
-    public init(notFoundPage: F.Type, serverErrorTemplate: S.Type, environment: Environment) {
-        self.environment = environment
+    public init(notFoundPage: F.Type, serverErrorTemplate: S.Type) {
+//        self.environment = environment
     }
 
     /// See `Middleware.respond`

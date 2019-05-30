@@ -133,16 +133,13 @@ class HTMLKitErrorMiddlewareTests: XCTestCase {
         try! routes(router)
         services.register(router, as: Router.self)
 
-        services.register { worker in
-            return HTMLKitErrorMiddleware(
-                notFoundPage: NotFoundPage.self,
-                serverErrorTemplate: ServerErrorTemplate.self,
-                environment: worker.environment
-            )
-        }
-
         var middlewares = MiddlewareConfig()
-        middlewares.use(HTMLKitErrorMiddleware<NotFoundPage, ServerErrorTemplate>.self)
+        middlewares.use(
+            HTMLKitErrorMiddleware(
+                notFoundPage: NotFoundPage.self,
+                serverErrorTemplate: ServerErrorTemplate.self
+            )
+        )
         services.register(middlewares)
 
         app = try! Application(config: config, services: services)
