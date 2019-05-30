@@ -46,6 +46,8 @@ public final class HTMLKitErrorMiddleware<F: StaticView, S: ContextualTemplate>:
                         return try self.renderServerErrorPage(for: status, request: req, renderer: renderer)
                 }
             } catch {
+                let logger = try req.make(Logger.self)
+                logger.error("Failed to render custom error page - \(error)")
                 return try renderServerErrorPage(for: status, request: req, renderer: renderer)
             }
         }
@@ -66,6 +68,7 @@ public final class HTMLKitErrorMiddleware<F: StaticView, S: ContextualTemplate>:
                     return try self.presentDefaultError(status: status, request: request, error: error)
             }
         } catch let error {
+            logger.error("Failed to render custom error page - \(error)")
             return try presentDefaultError(status: status, request: request, error: error)
         }
     }
